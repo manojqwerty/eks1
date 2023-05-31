@@ -3,6 +3,8 @@ pipeline {
     environment {
         AWS_ACCESS_KEY_ID     = credentials('enkins-aws-secret-key-id')
         AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+        AWS_DEFAULT_REGION = 'us-east-1'
+        EKS_CLUSTER_NAME = 'demo'
     }
     
     
@@ -31,5 +33,12 @@ pipeline {
             }
         
         }
+        stage('Deploy to EKS') {     
+      steps {
+        
+            sh 'aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME'
+            sh 'kubectl get nodes'
+          }
+      }
         }
         }
