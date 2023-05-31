@@ -40,7 +40,7 @@ pipeline {
             sh 'kubectl get nodes'
             sh 'kubectl apply -f kubernetes/development/nginx.yml'
             sh 'kubectl get pod -o wide'
-            sh 'kubectl get node -o wide'
+            sh 'kubectl get svc -o wide'
           }
       }
         }
