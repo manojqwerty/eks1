@@ -39,6 +39,8 @@ pipeline {
             sh 'aws eks --region $AWS_DEFAULT_REGION update-kubeconfig --name $EKS_CLUSTER_NAME'
             sh 'kubectl get nodes'
             sh 'kubectl apply -f kubernetes/development/nginx.yml'
+            sh 'kubectl get pod -o wide'
+            sh 'kubectl get node -o wide'
           }
       }
         }
